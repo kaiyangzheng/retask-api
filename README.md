@@ -17,10 +17,4 @@ As Ebbinghaus put it:
 
 - [ ]  Social network
 - [x]  Task goals
-- [x]  add endpoints to get task info, stats, and improvement
-    - [ ]  remove calculations from frontend when done
-- [x]  refactor
-    - [x]  rework APIViews to be not as clunky/messy
-    - [ ]  ManyToMany field - display data not id
-- [ ]  rewrite task stats algorithm
 - [ ]  web sockets for real time chat
