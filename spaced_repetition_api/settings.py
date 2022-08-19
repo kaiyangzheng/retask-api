@@ -32,7 +32,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
-    'https://spaced-repetition-api-v1.herokuapp.com',
+    'https://retask-api.herokuapp.com',
 ]
 
 
@@ -182,7 +182,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://spaced-repetition-api-v1.herokuapp.com',  
+    'https://retask-api.herokuapp.com',  
 ]
 
 SWAGGER_SETTINGS = {
