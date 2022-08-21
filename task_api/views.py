@@ -272,6 +272,20 @@ class ReviewSessionList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class ReviewSessionUser(APIView):
+    """
+    Retrieve all review sessions by user
+    """
+    def get(self, request):
+        review_sessions = ReviewSession.objects.filter(user=request.user)
+        if not review_sessions:
+            return Response(
+                {'message': 'Review sessions for user {} do not exist'.format(request.user.id)},
+            )
+        serializer = ReviewSessionSerializer(review_sessions, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 class ReviewSessionDetail(APIView):
     """
     Retrieve, update/finish, or delete review session
