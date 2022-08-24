@@ -318,7 +318,8 @@ class ReviewSessionDetail(APIView):
             'task': task_id,
             'quality': request.data.get('quality'),
             'time_finished': today,
-            'time_elapsed': int((today - review_session.time_started).total_seconds())
+            'time_elapsed': int((today - review_session.time_started).total_seconds()),
+            'completed': True
         }
         new_interval, new_repetitions, new_ease_factor = sm2(data['quality'], task.repetitions, task.ease_factor, task.interval)
         new_task_data = {
