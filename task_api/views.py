@@ -62,7 +62,7 @@ class TaskDetail(APIView):
         }
     ))
     def put(self, request, task_id):
-        task = task.objects.get(id=task_id, user=request.user)
+        task = Task.objects.get(id=task_id, user=request.user)
         if not task:
             return Response(
                 {'message': 'Task with id {} does not exist'.format(task_id)},
