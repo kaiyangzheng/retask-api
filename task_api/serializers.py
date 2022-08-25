@@ -4,7 +4,7 @@ from .models import Task, ReviewSession, Goal
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ('id', 'name', 'description', 'quality', 'repetitions', 'ease_factor', 'prev_review_date', 'next_review_date', 'interval', 'date_added', 'review_sessions', 'user')
+        fields = ('id', 'name', 'description', 'quality', 'repetitions', 'ease_factor', 'prev_review_date', 'next_review_date', 'interval', 'favorite', 'date_added', 'review_sessions', 'user')
         
 class ReviewSessionSerializer(serializers.ModelSerializer):
     class Meta:

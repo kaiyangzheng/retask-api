@@ -11,6 +11,7 @@ class Task(models.Model):
     prev_review_date = models.DateTimeField(null=True, blank=True)
     next_review_date = models.DateTimeField(null=True, blank=True)
     interval = models.IntegerField(default=0)
+    favorite = models.BooleanField(default=False)
     date_added = models.DateTimeField(auto_now_add=True)
     review_sessions = models.ManyToManyField('ReviewSession', blank=True, related_name='tasks')
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True, null=True)
