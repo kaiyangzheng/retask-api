@@ -257,11 +257,6 @@ class ReviewSessionList(APIView):
             return Response(
                 {'message': 'Task with id {} does not exist'.format(task_id)},
             )
-        review_session = ReviewSession.objects.filter(task=task_id, user=request.user)
-        if review_session:
-            return Response(
-                {'message': 'Review session for task {} already exists'.format(task_id)},
-            )
         data = {
             'user': request.user.id,
             'task': task_id
