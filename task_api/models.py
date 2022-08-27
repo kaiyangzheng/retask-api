@@ -3,7 +3,7 @@ from authentication.models import CustomUser
 # Create your models here.
 class Task(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True, default='')
     quality = models.IntegerField(default=0)
     repetitions = models.IntegerField(default=0)
