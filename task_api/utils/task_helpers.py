@@ -1,5 +1,5 @@
 from task_api.models import ReviewSession
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.utils import timezone
 
 def get_tasks_stats(tasks):
@@ -110,6 +110,7 @@ def get_task_types(tasks):
         'due': [],
         'in_progress': [],
         'overdue': [],
+        'all_clear': [],
     }
     now = timezone.now()
     for task in tasks:
@@ -123,7 +124,9 @@ def get_task_types(tasks):
             task_types['due'].append(task)
         elif task.next_review_date < now:
             task_types['overdue'].append(task)
-        elif task.next_review_date >= now + 1 and task.next_review_date <= now + 3:
+        elif task.next_review_date >= now + timedelta(days=1) and task.next_review_date <= now + timedelta(days=3):
             task_types['next_up'].append(task)
+        elif task.next_review_date > now + timedelta(days=3):
+            task.types['all_clear'].append(task)
     return task_types
         
