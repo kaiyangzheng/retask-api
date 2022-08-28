@@ -1,5 +1,6 @@
 from task_api.models import ReviewSession
 from datetime import datetime
+from django.utils import timezone
 
 def get_tasks_stats(tasks):
     basic_info = {
@@ -110,7 +111,7 @@ def get_task_types(tasks):
         'in_progress': [],
         'overdue': [],
     }
-    now = datetime.now()
+    now = timezone.now()
     for task in tasks:
         if task.prev_review_date == None:
             task_types['waiting_for_review'].append(task)
