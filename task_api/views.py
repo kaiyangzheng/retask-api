@@ -7,7 +7,7 @@ from datetime import datetime, timedelta, timezone
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 from .utils.sm2 import sm2 # SM2 algorithm
-from .utils.task_helpers import get_tasks_stats # helper functions for tasks
+from .utils.task_helpers import get_tasks_stats, get_task_types # helper functions for tasks
 
 # Create your views here.
 class TaskList(APIView):
@@ -91,23 +91,13 @@ class TaskTypes(APIView):
     
     def get(self, request):
         tasks = Task.objects.filter(user=request.user)
-        task_types = {
-            'waiting_for_review': [],
-            'in_progress': [],
-            'next_up': []
-        }
-        for task in tasks:
-            if task.prev_review_date == None: 
-                task_types['waiting_for_review'].append(task)
-            review_sessions = ReviewSession.objects.filter(task=task)
-            for review_session in review_sessions:
-                if not review_session.completed:
-                    task_types['in_progress'].append(task)
-        task_types['next_up'] = sorted(task_types['in_progress'], key=lambda x: x.next_review_date)[:3]
+        task_types = get_task_types(tasks)
         return Response({
             'waiting_for_review': TaskSerializer(task_types['waiting_for_review'], many=True).data,
             'in_progress': TaskSerializer(task_types['in_progress'], many=True).data,
-            'next_up': TaskSerializer(task_types['next_up'], many=True).data
+            'next_up': TaskSerializer(task_types['next_up'], many=True).data,
+            'due': TaskSerializer(task_types['due'], many=True).data,
+            'overdue': TaskSerializer(task_types['overdue'], many=True).data
         }, status=status.HTTP_200_OK)   
 
     

@@ -1,5 +1,6 @@
-# TODO: allow code to scale by adding a stat and a stat key, especially for calculating improvement
-# TODO: also use numpy for computing averages and standard deviations
+from models import ReviewSession
+from datetime import datetime
+
 def get_tasks_stats(tasks):
     basic_info = {
         'total_tasks_added': tasks.count(),
@@ -100,3 +101,30 @@ def get_tasks_stats(tasks):
     improvement['average_ease_factor']['average_prev_reviews'] = improvement['average_ease_factor']['average_prev_reviews'] / count if count > 0 else 0
 
     return basic_info, stats, improvement
+
+def get_task_types(tasks):
+    task_types = {
+        'waiting_for_review': [],
+        'next_up': [],
+        'due': [],
+        'in_progress': [],
+        'overdue': [],
+    }
+    now = datetime.now()
+    for task in tasks:
+        if task.prev_review_date == None:
+            task_types['waiting_for_review'].append(task)
+        review_sessions = ReviewSession.objects.filter(task=task)
+        for review_session in review_sessions:
+                if not review_session.completed:
+                    task_types['in_progress'].append(task)
+        if task.next_review_date == now: 
+            task_types['due'].append(task)
+        elif task.next_review_date > now:
+            task_types['overdue'].append(task)
+
+    tasks.order_by('next_review_date')
+    for i in range(0, 5):
+        task_types['next_up'].append(task[i])
+    return task_types
+        
