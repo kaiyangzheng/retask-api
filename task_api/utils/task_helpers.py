@@ -1,4 +1,4 @@
-from models import ReviewSession
+from task_api.models import ReviewSession
 from datetime import datetime
 
 def get_tasks_stats(tasks):
