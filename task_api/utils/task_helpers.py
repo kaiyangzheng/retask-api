@@ -127,6 +127,6 @@ def get_task_types(tasks):
         elif task.next_review_date >= now + timedelta(days=1) and task.next_review_date <= now + timedelta(days=3):
             task_types['next_up'].append(task)
         elif task.next_review_date > now + timedelta(days=3):
-            task.types['all_clear'].append(task)
+            task_types['all_clear'].append(task)
     return task_types
         
