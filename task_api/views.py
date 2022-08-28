@@ -97,7 +97,8 @@ class TaskTypes(APIView):
             'in_progress': TaskSerializer(task_types['in_progress'], many=True).data,
             'next_up': TaskSerializer(task_types['next_up'], many=True).data,
             'due': TaskSerializer(task_types['due'], many=True).data,
-            'overdue': TaskSerializer(task_types['overdue'], many=True).data
+            'overdue': TaskSerializer(task_types['overdue'], many=True).data,
+            'all_clear': TaskSerializer(task_types['all_clear'], many=True).data,
         }, status=status.HTTP_200_OK)   
 
     
