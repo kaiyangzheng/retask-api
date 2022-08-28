@@ -123,6 +123,6 @@ def get_task_types(tasks):
             task_types['due'].append(task)
         elif task.next_review_date > now:
             task_types['overdue'].append(task)
-    task_types['next_up'] = tasks.order_by('next_review_date')[0]
+    task_types['next_up'] = tasks.order_by('next_review_date')
     return task_types
         
