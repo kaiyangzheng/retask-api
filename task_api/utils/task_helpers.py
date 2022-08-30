@@ -116,12 +116,13 @@ def get_task_types(tasks):
     for task in tasks:
         if task.prev_review_date == None:
             task_types['waiting_for_review'].append(task)
+            return 
         review_sessions = ReviewSession.objects.filter(task=task)
         for review_session in review_sessions:
                 if not review_session.completed:
                     task_types['in_progress'].append(task)
         now_date = now.date()
-        next_review_date = task.next_review_date.date()
+        next_review_date = task.next_review_date.date() 
         if next_review_date == now_date:
             task_types['due'].append(task)
         elif next_review_date < now_date:
