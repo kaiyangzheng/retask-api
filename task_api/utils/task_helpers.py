@@ -120,8 +120,6 @@ def get_task_types(tasks):
         for review_session in review_sessions:
                 if not review_session.completed:
                     task_types['in_progress'].append(task)
-        print(now.date())
-        print(task.next_review_date.date())
         now_date = now.date()
         next_review_date = task.next_review_date.date()
         if next_review_date == now_date:
