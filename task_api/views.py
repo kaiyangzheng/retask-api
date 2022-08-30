@@ -189,7 +189,7 @@ class GoalDetail(APIView):
         }
     ))
     def post(self, request):
-        serializer = GoalSerializer(daata=request.data)
+        serializer = GoalSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
