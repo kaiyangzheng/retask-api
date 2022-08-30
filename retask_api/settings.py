@@ -198,4 +198,5 @@ SWAGGER_SETTINGS = {
 
 import django_heroku
 django_heroku.settings(locals())
-# IMPORTANT: remove comment on deploydel DATABASES['default']['OPTIONS']['sslmode']
+# IMPORTANT: remove comment on deploy
+del DATABASES['default']['OPTIONS']['sslmode']
