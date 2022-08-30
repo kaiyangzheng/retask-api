@@ -126,9 +126,9 @@ def get_task_types(tasks):
             task_types['due'].append(task)
         elif next_review_date < now_date:
             task_types['overdue'].append(task)
-        elif next_review_date >= now_date + timedelta(days=1) and next_review_date <= now_date + timedelta(days=3):
+        elif next_review_date >= (now_date + timedelta(days=1)).date() and next_review_date <= (now_date + timedelta(days=3)).date():
             task_types['next_up'].append(task)
-        elif next_review_date > now_date + timedelta(days=3):
+        elif next_review_date > (now_date + timedelta(days=3)).date():
             task_types['all_clear'].append(task)
     return task_types
         
