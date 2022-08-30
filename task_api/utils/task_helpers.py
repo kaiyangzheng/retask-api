@@ -107,7 +107,7 @@ def get_task_types(tasks):
     task_types = {
         'waiting_for_review': [],
         'next_up': [],
-        'due': [],
+        'due': [],  
         'in_progress': [],
         'overdue': [],
         'all_clear': [],
@@ -116,7 +116,7 @@ def get_task_types(tasks):
     for task in tasks:
         if task.prev_review_date == None:
             task_types['waiting_for_review'].append(task)
-            return 
+            continue
         review_sessions = ReviewSession.objects.filter(task=task)
         for review_session in review_sessions:
                 if not review_session.completed:
