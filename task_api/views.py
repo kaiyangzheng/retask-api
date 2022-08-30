@@ -1,8 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
-from .models import Task, ReviewSession # Goal
-from .serializers import TaskSerializer, ReviewSessionSerializer# GoalSerializer
+from .models import Task, ReviewSession, Goal
+from .serializers import TaskSerializer, ReviewSessionSerializer, GoalSerializer
 from datetime import datetime, timedelta, timezone
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
@@ -159,6 +159,41 @@ class TaskDetailAdmin(APIView):
             )
         task.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class GoalDetail(APIView):
+    """
+    Retrieve or create goal instance
+    """
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = GoalSerializer
+    http_method_names = ['get', 'post']
+
+    def get(self, request):
+        goal = Goal.objects.filter(user=request.user).latest('id')
+        if not goal:
+            return Response(
+                {'message': 'Goal from user {} does not exist'.format(request.user.id)}
+            )
+        serializer = GoalSerializer(goal)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @swagger_auto_schema(request_body=openapi.Schema(
+        type=openapi.TYPE_OBJECT,
+        properties={
+            'date_added': openapi.Schema(type=openapi.TYPE_STRING),
+            'deadline': openapi.Schema(type=openapi.TYPE_STRING),
+            'total_added': openapi.Schema(type=openapi.TYPE_INTEGER),
+            'average_quality': openapi.Schema(type=openapi.TYPE_NUMBER),
+            'average_repetitions': openapi.Schema(type=openapi.TYPE_NUMBER),
+            'average_time_spent': openapi.Schema(type=openapi.TYPE_INTEGER),
+        }
+    ))
+    def post(self, request):
+        serializer = GoalSerializer(daata=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 # class GoalDetail(APIView):
 #     """
