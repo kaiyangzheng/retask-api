@@ -50,4 +50,4 @@ class Goal(models.Model):
     average_quality = models.FloatField(default=3)
     average_repetitions = models.FloatField(default=5)
     average_time_spent = models.IntegerField(default=600)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True, null-True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True, null=True)
