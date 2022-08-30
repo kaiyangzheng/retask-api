@@ -46,7 +46,6 @@ class ReviewSession(models.Model):
 class Goal(models.Model):
     id = models.AutoField(primary_key=True)
     date_added = models.DateTimeField(auto_now_add=True)
-    deadline = models.DateTimeField(null=True, blank=True)
     total_added = models.IntegerField(default=5)
     average_quality = models.FloatField(default=3)
     average_repetitions = models.FloatField(default=5)
