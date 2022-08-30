@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Task, ReviewSession, Goal
+from .models import Task, ReviewSession#, Goal
 
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,7 +11,7 @@ class ReviewSessionSerializer(serializers.ModelSerializer):
         model = ReviewSession
         fields = ('id', 'user', 'task', 'quality', 'ease_factor', 'time_started', 'time_finished', 'time_elapsed', 'completed')
         
-class GoalSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Goal
-        fields = ('id', 'average_quality', 'average_time_spent', 'average_repetitions', 'total_added', 'date_created', 'deadline', 'user')
+# class GoalSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Goal
+#         fields = ('id', 'average_quality', 'average_time_spent', 'average_repetitions', 'total_added', 'date_created', 'deadline', 'user')
