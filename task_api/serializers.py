@@ -14,7 +14,7 @@ class ReviewSessionSerializer(serializers.ModelSerializer):
 class GoalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Goal
-        fields = ('id', 'date_added', 'deadline', 'total_added', 'average_quality', 'average_repetitions', 'average_time_spent', 'user')
+        fields = ('id', 'date_added', 'total_added', 'average_quality', 'average_repetitions', 'average_time_spent', 'user')
         
 # class GoalSerializer(serializers.ModelSerializer):
 #     class Meta:
