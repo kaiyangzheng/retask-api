@@ -12,7 +12,7 @@ class ReviewSessionSerializer(serializers.ModelSerializer):
         fields = ('id', 'user', 'task', 'quality', 'ease_factor', 'time_started', 'time_finished', 'time_elapsed', 'completed')
 
 class GoalSerializer(serializers.ModelSerializer):
-    class meta:
+    class Meta:
         model = Goal
         fields = ('id', 'date_added', 'deadline', 'total_added', 'average_quality', 'average_repetitions', 'average_time_spent', 'user')
         
