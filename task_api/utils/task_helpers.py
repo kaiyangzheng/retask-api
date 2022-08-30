@@ -120,13 +120,17 @@ def get_task_types(tasks):
         for review_session in review_sessions:
                 if not review_session.completed:
                     task_types['in_progress'].append(task)
-        if task.next_review_date == now: 
+        print(now.date())
+        print(task.next_review_date.date())
+        now_date = now.date()
+        next_review_date = task.next_review_date.date()
+        if next_review_date == now_date:
             task_types['due'].append(task)
-        elif task.next_review_date < now:
+        elif next_review_date < now_date:
             task_types['overdue'].append(task)
-        elif task.next_review_date >= now + timedelta(days=1) and task.next_review_date <= now + timedelta(days=3):
+        elif next_review_date >= now_date + timedelta(days=1) and next_review_date <= now_date + timedelta(days=3):
             task_types['next_up'].append(task)
-        elif task.next_review_date > now + timedelta(days=3):
+        elif next_review_date > now_date + timedelta(days=3):
             task_types['all_clear'].append(task)
     return task_types
         
