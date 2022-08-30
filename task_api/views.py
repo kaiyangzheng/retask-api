@@ -189,11 +189,6 @@ class GoalDetail(APIView):
         }
     ))
     def post(self, request):
-        try:
-            goal = Goal.objects.get(user=request.user)
-            self.delete(request)
-        except:
-            goal = None
         serializer = GoalSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
