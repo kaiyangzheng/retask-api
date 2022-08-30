@@ -54,4 +54,4 @@ class Goal(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True, null=True)
     
     def __str__(self):
-        return self.user.username + " " + str(self.date_created)
+        return self.id 
