@@ -189,7 +189,6 @@ class GoalDetail(APIView):
         }
     ))
     def post(self, request):
-        print(request.data)
         serializer = GoalSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(user=request.user)
