@@ -32,6 +32,8 @@ class UserFriendRequest(APIView):
     def post(self, request):
         from_user = request.user
         to_user = CustomUser.objects.get(id=request.data['to_user'])
+        if from_user in to_user.friends.all():
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': 'Users are already friends'})
         friend_request, created = FriendRequest.objects.get_or_create(from_user=from_user, to_user=to_user)
         if created:
             return Response(status=status.HTTP_201_CREATED, data={'message': 'Friend request sent'})
