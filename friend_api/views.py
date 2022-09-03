@@ -52,6 +52,10 @@ class UserFriendRequest(APIView):
             from_user.friends.add(to_user)
             to_user.friends.add(from_user)
             friend_request.delete()
+            friend_request = FriendRequest.objects.get(to_user=from_user, from_user=to_user)
+            if friend_request:
+                print(friend_request)
+                friend_request.delete()
             return Response(status=status.HTTP_200_OK, data={'message': 'Friend request accepted'})
         else:
             friend_request.delete()
