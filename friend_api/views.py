@@ -45,8 +45,8 @@ class UserFriendRequest(APIView):
         if not friend_request:
             return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': 'Friend request not found'})
         if friend_request.to_user == request.user and accept:
-            from_user = CustomUser.object.get(id=friend_request.from_user.id)
-            to_user = CustomUser.object.get(id=friend_request.to_user.id)
+            from_user = CustomUser.objects.get(id=friend_request.from_user.id)
+            to_user = CustomUser.objects.get(id=friend_request.to_user.id)
             from_user.friends.add(to_user)
             to_user.friends.add(from_user)
             other_request = FriendRequest.objects.get(to_user=from_user, from_user=to_user)
